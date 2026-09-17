@@ -3,13 +3,14 @@ package main
 
 import (
 	"context"
-	"jobdeck/services/job-api/internal/domain"
-	jobdb "jobdeck/services/job-api/internal/repository/gen"
 	"log"
 	"log/slog"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
+	jobdb "github.com/air-hand-org/jobdeck-job-api/internal/repository/gen"
 
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgxpool"

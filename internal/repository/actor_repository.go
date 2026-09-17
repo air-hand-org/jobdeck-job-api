@@ -3,9 +3,10 @@ package repository
 
 import (
 	"context"
-	"jobdeck/services/job-api/internal/app"
-	"jobdeck/services/job-api/internal/domain"
-	jobdb "jobdeck/services/job-api/internal/repository/gen"
+
+	"github.com/air-hand-org/jobdeck-job-api/internal/app"
+	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
+	jobdb "github.com/air-hand-org/jobdeck-job-api/internal/repository/gen"
 
 	"github.com/cockroachdb/errors"
 	"github.com/google/uuid"

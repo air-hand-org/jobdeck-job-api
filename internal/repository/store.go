@@ -2,9 +2,10 @@ package repository
 
 import (
 	"context"
-	"jobdeck/services/job-api/internal/app"
-	"jobdeck/services/job-api/internal/eventing"
-	jobdb "jobdeck/services/job-api/internal/repository/gen"
+
+	"github.com/air-hand-org/jobdeck-job-api/internal/app"
+	"github.com/air-hand-org/jobdeck-job-api/internal/eventing"
+	jobdb "github.com/air-hand-org/jobdeck-job-api/internal/repository/gen"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )

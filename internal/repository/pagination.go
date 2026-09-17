@@ -3,8 +3,9 @@ package repository
 import (
 	"encoding/base64"
 	"encoding/json"
-	"jobdeck/services/job-api/internal/domain"
 	"time"
+
+	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
 
 	"github.com/cockroachdb/errors"
 	"github.com/google/uuid"

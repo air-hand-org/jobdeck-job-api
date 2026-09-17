@@ -1,4 +1,4 @@
-module jobdeck/services/job-api
+module github.com/air-hand-org/jobdeck-job-api
 
 go 1.26.4
 

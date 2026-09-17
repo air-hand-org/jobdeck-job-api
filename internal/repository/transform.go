@@ -9,8 +9,8 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/samber/lo"
 
-	"jobdeck/services/job-api/internal/domain"
-	jobdb "jobdeck/services/job-api/internal/repository/gen"
+	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
+	jobdb "github.com/air-hand-org/jobdeck-job-api/internal/repository/gen"
 )
 
 func timeToPGType(t time.Time) (pgtype.Timestamptz, error) {

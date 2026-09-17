@@ -11,13 +11,13 @@ generate:
 	@sqlc generate
 
 .PHONY: build
-build: generate go-build cs-build
+build: go-build
 
 .PHONY: fmt
-fmt: go-fmt cs-fmt tofu-fmt
+fmt: go-fmt
 
 .PHONY: lint
-lint: go-lint cs-lint
+lint: go-lint
 
 .PHONY: check-clean
 check-clean:
@@ -25,4 +25,4 @@ check-clean:
 	@test -z "$$(git status --porcelain)"
 
 .PHONY: test
-test: go-test cs-test
+test: go-test

@@ -7,7 +7,7 @@ import (
 	"log"
 	"os"
 
-	"jobdeck/services/job-api/internal/migrator"
+	"github.com/air-hand-org/jobdeck-job-api/internal/migrator"
 )
 
 type config struct {

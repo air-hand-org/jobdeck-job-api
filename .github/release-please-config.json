@@ -1,19 +1,12 @@
 {
   "packages": {
     ".": {
-      "release-type": "simple",
-      "package-name": "jobdeck",
+      "release-type": "go",
+      "package-name": "jobdeck-job-api",
       "draft": false,
       "include-component-in-tag": false,
       "force-tag-creation": true,
-      "always-update": true,
-      "extra-files": [
-        {
-          "type": "yaml",
-          "path": "environments/production.yaml",
-          "jsonpath": "$.images[ui,demo,job-api,job-worker,forward-proxy].version"
-        }
-      ]
+      "always-update": true
     }
   }
 }

@@ -5,7 +5,7 @@ package transform
 import (
 	"fmt"
 	jobv1 "github.com/air-hand-org/api-contracts/packages/jobdeck/job/go/v1"
-	domain "jobdeck/services/job-api/internal/domain"
+	domain "github.com/air-hand-org/jobdeck-job-api/internal/domain"
 )
 
 func jobTypeToProto(value domain.JobType) jobv1.JobType {
