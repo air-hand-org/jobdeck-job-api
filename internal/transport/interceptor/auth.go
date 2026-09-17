@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 
-	internal_auth "jobdeck/services/job-api/internal/auth"
-	"jobdeck/services/job-api/internal/domain"
+	internal_auth "github.com/air-hand-org/jobdeck-job-api/internal/auth"
+	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
 
 	"github.com/google/uuid"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/auth"

@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"jobdeck/services/job-api/internal/domain"
+	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
 )
 
 // ExecutionQueueRepository provides queue operations.

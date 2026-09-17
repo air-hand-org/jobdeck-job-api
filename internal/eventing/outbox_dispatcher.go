@@ -2,10 +2,11 @@ package eventing
 
 import (
 	"context"
-	"jobdeck/services/job-api/internal/app"
-	"jobdeck/services/job-api/internal/domain"
 	"log/slog"
 	"time"
+
+	"github.com/air-hand-org/jobdeck-job-api/internal/app"
+	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
 
 	"github.com/cockroachdb/errors"
 	"github.com/samber/lo"

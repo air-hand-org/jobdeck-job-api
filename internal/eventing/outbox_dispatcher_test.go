@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"jobdeck/services/job-api/internal/domain"
+	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
 
 	"github.com/cockroachdb/errors"
 	"github.com/google/uuid"

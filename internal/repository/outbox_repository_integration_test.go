@@ -6,10 +6,10 @@ import (
 	"testing"
 	"time"
 
-	"jobdeck/services/job-api/internal/app"
-	"jobdeck/services/job-api/internal/domain"
-	"jobdeck/services/job-api/internal/eventing"
-	"jobdeck/services/job-api/internal/migrator"
+	"github.com/air-hand-org/jobdeck-job-api/internal/app"
+	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
+	"github.com/air-hand-org/jobdeck-job-api/internal/eventing"
+	"github.com/air-hand-org/jobdeck-job-api/internal/migrator"
 
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgxpool"

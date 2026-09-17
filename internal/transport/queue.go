@@ -2,10 +2,11 @@ package transport
 
 import (
 	"context"
-	"jobdeck/services/job-api/internal/app"
-	"jobdeck/services/job-api/internal/auth"
-	"jobdeck/services/job-api/internal/domain"
-	"jobdeck/services/job-api/internal/transform"
+
+	"github.com/air-hand-org/jobdeck-job-api/internal/app"
+	"github.com/air-hand-org/jobdeck-job-api/internal/auth"
+	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
+	"github.com/air-hand-org/jobdeck-job-api/internal/transform"
 
 	jobv1 "github.com/air-hand-org/api-contracts/packages/jobdeck/job/go/v1"
 

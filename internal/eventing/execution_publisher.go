@@ -3,7 +3,8 @@ package eventing
 
 import (
 	"context"
-	"jobdeck/services/job-api/internal/domain"
+
+	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
 )
 
 // ExecutionPublisher publishes execution-related events.

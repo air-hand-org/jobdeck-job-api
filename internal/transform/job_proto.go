@@ -11,7 +11,7 @@ import (
 	"google.golang.org/protobuf/types/known/durationpb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	"jobdeck/services/job-api/internal/domain"
+	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
 )
 
 func retryPolicyToProto(p domain.RetryPolicy) *jobv1.RetryPolicy {

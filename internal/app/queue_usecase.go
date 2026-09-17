@@ -2,8 +2,9 @@ package app
 
 import (
 	"context"
-	"jobdeck/services/job-api/internal/domain"
 	"time"
+
+	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
 
 	"github.com/cockroachdb/errors"
 )

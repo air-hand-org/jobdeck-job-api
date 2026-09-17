@@ -12,13 +12,13 @@ RUN --mount=type=secret,id=github_contents_token \
     GIT_CONFIG_COUNT=1 \
     GIT_CONFIG_KEY_0="url.https://x-access-token:$(cat /run/secrets/github_contents_token)@github.com/.insteadOf" \
     GIT_CONFIG_VALUE_0="https://github.com/" \
-    CGO_ENABLED=0 go build -trimpath -ldflags='-s -w' -o /out/job-api ./services/job-api/cmd/server
+    CGO_ENABLED=0 go build -trimpath -ldflags='-s -w' -o /out/job-api ./cmd/server
 RUN --mount=type=cache,target=/go/pkg/mod,id=jobdeck-go-mod \
     --mount=type=cache,target=/root/.cache/go-build,id=jobdeck-go-build \
-    CGO_ENABLED=0 go build -trimpath -ldflags='-s -w' -o /out/job-api-migrator ./services/job-api/cmd/migrator
+    CGO_ENABLED=0 go build -trimpath -ldflags='-s -w' -o /out/job-api-migrator ./cmd/migrator
 RUN --mount=type=cache,target=/go/pkg/mod,id=jobdeck-go-mod \
     --mount=type=cache,target=/root/.cache/go-build,id=jobdeck-go-build \
-    CGO_ENABLED=0 go build -trimpath -ldflags='-s -w' -o /out/job-api-entrypoint ./services/job-api/cmd/entrypoint
+    CGO_ENABLED=0 go build -trimpath -ldflags='-s -w' -o /out/job-api-entrypoint ./cmd/entrypoint
 
 FROM gcr.io/distroless/base-debian12:nonroot
 COPY --from=build /out/job-api /job-api

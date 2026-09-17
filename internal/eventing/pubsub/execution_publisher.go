@@ -3,8 +3,9 @@ package pubsub
 
 import (
 	"context"
-	"jobdeck/services/job-api/internal/domain"
-	"jobdeck/services/job-api/internal/eventing"
+
+	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
+	"github.com/air-hand-org/jobdeck-job-api/internal/eventing"
 
 	jobv1 "github.com/air-hand-org/api-contracts/packages/jobdeck/job/go/v1"
 
