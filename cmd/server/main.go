@@ -113,7 +113,7 @@ func main() {
 		log.Fatalf("failed to new proto validate")
 	}
 
-	verifier, err := auth.NewJWTVerifier(os.Getenv("AUTH_JWKS_URL"))
+	verifier, err := auth.NewJWTVerifier(os.Getenv("AUTH_HTTP_ENDPOINT"))
 	if err != nil {
 		log.Fatalf("failed to new jwt verifier: %v", err)
 	}

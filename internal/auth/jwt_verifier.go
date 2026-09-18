@@ -151,11 +151,12 @@ func (v *JWTVerifier) publicKey(ctx context.Context, kid string) (ed25519.Public
 	return key, nil
 }
 
-// NewJWTVerifier creates a verifier that obtains public signing keys from a JWKS endpoint.
-func NewJWTVerifier(jwksURL string) (*JWTVerifier, error) {
-	parsedURL, err := url.ParseRequestURI(strings.TrimSpace(jwksURL))
-	if err != nil || parsedURL.Scheme == "" || parsedURL.Host == "" {
-		return nil, errors.New("invalid JWKS URL")
+// NewJWTVerifier creates a verifier that obtains public signing keys from the auth HTTP endpoint.
+func NewJWTVerifier(authHTTPEndpoint string) (*JWTVerifier, error) {
+	parsedURL, err := url.ParseRequestURI(strings.TrimSpace(authHTTPEndpoint))
+	if err != nil || parsedURL.Scheme == "" || parsedURL.Host == "" ||
+		(parsedURL.Path != "" && parsedURL.Path != "/") || parsedURL.RawQuery != "" || parsedURL.Fragment != "" || parsedURL.User != nil {
+		return nil, errors.New("invalid auth HTTP endpoint")
 	}
 
 	configuration := jwksclient.NewConfiguration()
