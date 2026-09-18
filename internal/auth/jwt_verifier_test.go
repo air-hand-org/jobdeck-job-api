@@ -12,8 +12,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
 	jwtauthv1 "github.com/air-hand-org/api-contracts/packages/jobdeck/auth/go/jsonschema/v1"
+	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
@@ -105,9 +105,16 @@ func TestJWTVerifierVerifyRejectsUnknownKeyID(t *testing.T) {
 	require.ErrorIs(t, err, domain.ErrTokenInvalid)
 }
 
-func TestNewJWTVerifierRejectsInvalidURL(t *testing.T) {
+func TestNewJWTVerifierRejectsInvalidAuthHTTPEndpoint(t *testing.T) {
 	t.Parallel()
 
 	_, err := NewJWTVerifier("not-a-url")
-	require.EqualError(t, err, "invalid JWKS URL")
+	require.EqualError(t, err, "invalid auth HTTP endpoint")
+}
+
+func TestNewJWTVerifierRejectsJWKSPath(t *testing.T) {
+	t.Parallel()
+
+	_, err := NewJWTVerifier("https://auth.example/.well-known/jwks.json")
+	require.EqualError(t, err, "invalid auth HTTP endpoint")
 }

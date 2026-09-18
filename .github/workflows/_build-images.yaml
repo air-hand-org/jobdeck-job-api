@@ -55,6 +55,8 @@ jobs:
           context: .
           platforms: linux/amd64
           push: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           secrets: |
             github_contents_token=${{ steps.app-token.outputs.token }}
 
@@ -124,6 +126,8 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: ${{ env.ARTIFACT_REGISTRY_HOST }}/${{ vars.GCP_PROJECT_ID }}/jobdeck-job-api/job-api:${{ env.IMAGE_TAG }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           secrets: |
             github_contents_token=${{ steps.app-token.outputs.token }}
       - name: Login to GHCR
