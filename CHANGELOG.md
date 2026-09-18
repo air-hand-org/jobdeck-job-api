@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.6](https://github.com/air-hand-org/jobdeck-job-api/compare/v1.1.5...v1.1.6) (2026-09-18)
+
+
+### Bug Fixes
+
+* configure auth HTTP endpoint ([#6](https://github.com/air-hand-org/jobdeck-job-api/issues/6)) ([7d6cd2a](https://github.com/air-hand-org/jobdeck-job-api/commit/7d6cd2aa91b675c86b046ed678745983c8f22b77))
+
 ## [1.1.5](https://github.com/air-hand-org/jobdeck-job-api/compare/v1.1.4...v1.1.5) (2026-09-18)
 
 
