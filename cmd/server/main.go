@@ -25,7 +25,7 @@ import (
 	"github.com/air-hand-org/jobdeck-job-api/internal/transport"
 	"github.com/air-hand-org/jobdeck-job-api/internal/transport/interceptor"
 
-	jobv1 "github.com/air-hand-org/api-contracts/packages/jobdeck/job/go/v1"
+	jobv1 "github.com/air-hand-org/api-contracts/packages/jobdeck/job/go/proto/v1"
 
 	"buf.build/go/protovalidate"
 	"cloud.google.com/go/pubsub/v2"

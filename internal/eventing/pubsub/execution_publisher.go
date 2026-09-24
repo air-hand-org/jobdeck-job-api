@@ -7,7 +7,7 @@ import (
 	"github.com/air-hand-org/jobdeck-job-api/internal/domain"
 	"github.com/air-hand-org/jobdeck-job-api/internal/eventing"
 
-	jobv1 "github.com/air-hand-org/api-contracts/packages/jobdeck/job/go/v1"
+	jobv1 "github.com/air-hand-org/api-contracts/packages/jobdeck/job/go/proto/v1"
 
 	"cloud.google.com/go/pubsub/v2"
 	"github.com/cockroachdb/errors"
