@@ -36,5 +36,7 @@ FROM gcr.io/distroless/base-debian12:nonroot
 COPY --from=build /out/job-api /job-api
 COPY --from=build /out/job-api-migrator /job-api-migrator
 COPY --from=build /out/job-api-entrypoint /job-api-entrypoint
+COPY LICENSE /LICENSE
+COPY third_party/licenses/linux-amd64 /third_party
 USER nonroot:nonroot
 ENTRYPOINT ["/job-api-entrypoint"]
