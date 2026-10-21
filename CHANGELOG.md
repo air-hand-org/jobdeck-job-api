@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.8](https://github.com/air-hand-org/jobdeck-job-api/compare/v1.1.7...v1.1.8) (2026-10-21)
+
+
+### Bug Fixes
+
+* package application and third-party licenses ([#11](https://github.com/air-hand-org/jobdeck-job-api/issues/11)) ([8b4b1b7](https://github.com/air-hand-org/jobdeck-job-api/commit/8b4b1b7954c85c929b06a1829e1c6326d803d1ff))
+
 ## [1.1.7](https://github.com/air-hand-org/jobdeck-job-api/compare/v1.1.6...v1.1.7) (2026-09-24)
 
 
