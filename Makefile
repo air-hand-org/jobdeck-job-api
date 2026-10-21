@@ -11,7 +11,14 @@ generate:
 	@sqlc generate
 
 .PHONY: build
-build: go-build
+build: go-build licenses
+
+# Match the platform currently published by _build-images.yaml.
+.PHONY: licenses
+licenses:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go-licenses check ./cmd/server ./cmd/migrator ./cmd/entrypoint --ignore github.com/air-hand-org/jobdeck-job-api --disallowed_types=forbidden,unknown
+	rm -rf third_party/licenses/linux-amd64
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go-licenses save ./cmd/server ./cmd/migrator ./cmd/entrypoint --ignore github.com/air-hand-org/jobdeck-job-api --save_path third_party/licenses/linux-amd64
 
 .PHONY: fmt
 fmt: go-fmt
