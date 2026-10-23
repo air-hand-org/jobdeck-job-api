@@ -5,6 +5,3 @@ grpcurl = "1.9.3"
 
 [env]
 GOWORK = "off"
-GITHUB_ACTOR = {
-    default = '''{{ exec(command="gh auth status --hostname github.com --json hosts --jq '.hosts[][] | select(.active) | .login'") }}''',
-}
