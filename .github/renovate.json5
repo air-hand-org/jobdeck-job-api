@@ -31,6 +31,16 @@
   },
   "packageRules": [
     {
+      "description": "Consume internally controlled api-contracts Go modules without an additional delay",
+      "matchManagers": [
+        "gomod"
+      ],
+      "matchPackageNames": [
+        "/^github\\.com/air-hand-org/api-contracts(?:/|$)/"
+      ],
+      "minimumReleaseAge": "0 days"
+    },
+    {
       "description": "Consume internally controlled jobdeck-actions releases without an additional delay",
       "matchManagers": [
         "github-actions"
