@@ -84,7 +84,7 @@ jobs:
           password: ${{ steps.google-auth.outputs.access_token }}
       - name: Check whether image already exists
         id: image
-        uses: air-hand-org/jobdeck-actions/actions/image-exists@287f4026cd3c9245ccb7755f427ce5c8ebe75482 # v1.4.1
+        uses: air-hand-org/jobdeck-actions/actions/image-exists@e5aa60360a796502ea0b51616eafdd097c9f731b # v1.5.3
         with:
           image: ${{ env.ARTIFACT_REGISTRY_HOST }}/${{ vars.GCP_PROJECT_ID }}/jobdeck-job-api/job-api:${{ env.IMAGE_TAG }}
       - name: Build and push image
@@ -105,7 +105,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       # Always check GHCR, including when a previous attempt already pushed to AR.
       - name: Copy image to GHCR if missing
-        uses: air-hand-org/jobdeck-actions/actions/copy-image@287f4026cd3c9245ccb7755f427ce5c8ebe75482 # v1.4.1
+        uses: air-hand-org/jobdeck-actions/actions/copy-image@e5aa60360a796502ea0b51616eafdd097c9f731b # v1.5.3
         with:
           src: ${{ env.ARTIFACT_REGISTRY_HOST }}/${{ vars.GCP_PROJECT_ID }}/jobdeck-job-api/job-api:${{ env.IMAGE_TAG }}
           dest: ghcr.io/${{ github.repository_owner }}/jobdeck-job-api:${{ env.IMAGE_TAG }}
