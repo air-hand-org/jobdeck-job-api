@@ -1,7 +1,7 @@
 [tools]
 go = "1.26.4"
 "go:github.com/nammn/go-licenses/v2" = "v2.0.0-20261013105856-260edf655cee"
-grpcurl = "1.9.3"
+grpcurl = "1.9.4"
 
 [env]
 GOWORK = "off"
