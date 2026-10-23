@@ -4,6 +4,8 @@ FROM ghcr.io/jdx/mise:2026.10.15-debian AS build
 WORKDIR /src
 ENV GOPATH=/go \
     GOTOOLCHAIN=local \
+    GOWORK=off \
+    MISE_NO_ENV=1 \
     MISE_TRUSTED_CONFIG_PATHS=/src
 
 COPY mise.toml ./
