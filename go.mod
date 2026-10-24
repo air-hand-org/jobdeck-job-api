@@ -9,7 +9,7 @@ require (
 	buf.build/go/protovalidate v1.2.0
 	cloud.google.com/go/pubsub/v2 v2.7.0
 	github.com/air-hand-org/api-contracts/packages/jobdeck/auth v1.3.3
-	github.com/air-hand-org/api-contracts/packages/jobdeck/job v1.2.2
+	github.com/air-hand-org/api-contracts/packages/jobdeck/job v1.2.3
 	github.com/cockroachdb/errors v1.14.0
 	github.com/exaring/otelpgx v0.13.0
 	github.com/golang-jwt/jwt/v5 v5.3.1
