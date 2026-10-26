@@ -23,6 +23,9 @@
   "automergeStrategy": "squash",
   "platformAutomerge": true,
   "rebaseWhen": "auto",
+  "gitIgnoredAuthors": [
+    "air-hand-release-app[bot]@users.noreply.github.com"
+  ],
   "vulnerabilityAlerts": {
     "automerge": false
   },
