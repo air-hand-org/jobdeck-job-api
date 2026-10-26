@@ -30,8 +30,8 @@ github.com/Microsoft/go-winio v0.6.3 h1:M/52tsoyTfwaxajLnXZm7PqkbMGRH8iSWP+8fcg9
 github.com/Microsoft/go-winio v0.6.3/go.mod h1:ma0QpxizD4fyyzJ1C7MIblymTD2Nxz5Mho/3CepwIZg=
 github.com/air-hand-org/api-contracts/packages/jobdeck/auth v1.4.0 h1:eXUevHAmogkMQf80AIIYdBFEiuuIu5CrqXCFQSyjSo4=
 github.com/air-hand-org/api-contracts/packages/jobdeck/auth v1.4.0/go.mod h1:4AIsQqlCQ6uRj+eFbqHKMUOVjUKL5yfdY3PjJPLTWhk=
-github.com/air-hand-org/api-contracts/packages/jobdeck/job v1.2.3 h1:txlUm2/3YS+i9pd8D0TdgkZIykaJwu0Vwk/58p+RzhE=
-github.com/air-hand-org/api-contracts/packages/jobdeck/job v1.2.3/go.mod h1:TAij6w0LS5iF2uFKtkFRTtEKCq4h6UsxxPP7JOJzQiQ=
+github.com/air-hand-org/api-contracts/packages/jobdeck/job v1.3.0 h1:Oj/9EcghgbZtR5PjEhpjbz+7eBoFjgtj+osJ5ft+4bA=
+github.com/air-hand-org/api-contracts/packages/jobdeck/job v1.3.0/go.mod h1:kvevb83mxn8jPBR80hkS8UVpkKnsB9JC0UN0ZvsKyD8=
 github.com/antlr4-go/antlr/v4 v4.13.1 h1:SqQKkuVZ+zWkMMNkjy5FZe5mr5WURWnlpmOuzYWrPrQ=
 github.com/antlr4-go/antlr/v4 v4.13.1/go.mod h1:GKmUxMtwp6ZgGwZSva4eWPC5mS6vUAmOABFgjdkM7Nw=
 github.com/brianvoe/gofakeit/v6 v6.28.0 h1:Xib46XXuQfmlLS2EXRuJpqcw8St6qSZz75OUo0tgAW4=
