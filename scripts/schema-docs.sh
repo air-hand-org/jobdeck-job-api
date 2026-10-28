@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Unique projects isolate concurrent runs; never connect to an existing database.
 work=$(mktemp -d)
-compose=(docker compose -f compose.schema-docs.yaml -p "schema-docs-$(basename "$work" | tr '[:upper:].' '[:lower:]-')")
+compose=(docker compose -f scripts/compose.schema-docs.yaml -p "schema-docs-$(basename "$work" | tr '[:upper:].' '[:lower:]-')")
 cleanup() {
   "${compose[@]}" down --volumes --remove-orphans >/dev/null || true
   rm -rf "$work"
