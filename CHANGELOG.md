@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/air-hand-org/jobdeck-job-api/compare/v1.1.9...v1.2.0) (2026-10-28)
+
+
+### Features
+
+* generate versioned schema docs with tbls and Mermaid ([#59](https://github.com/air-hand-org/jobdeck-job-api/issues/59)) ([55d2eee](https://github.com/air-hand-org/jobdeck-job-api/commit/55d2eee162ce3a557a8931b2abb82fbe4a9fa792))
+
 ## [1.1.9](https://github.com/air-hand-org/jobdeck-job-api/compare/v1.1.8...v1.1.9) (2026-10-28)
 
 
