@@ -9,7 +9,7 @@
 #   - all
 registries:
 - type: standard
-  ref: v4.576.0 # renovate: depName=aquaproj/aqua-registry
+  ref: v4.577.0 # renovate: depName=aquaproj/aqua-registry
 packages:
 - name: k1LoW/tbls@v1.96.1
 - name: pressly/goose@v3.29.0
