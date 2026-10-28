@@ -40,6 +40,13 @@ jobs:
           app-private-key: ${{ secrets.GH_APP_RELEASE_PRIVATE_KEY }}
       - name: lint
         run: make lint
+      - name: generate schema documentation
+        env:
+          PG_BIN: /usr/lib/postgresql/18/bin
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-18
+          make schema-docs
       - name: check clean
         run: make check-clean
       - name: test

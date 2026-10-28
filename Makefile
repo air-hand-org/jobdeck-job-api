@@ -31,5 +31,13 @@ check-clean:
 	@git status --short
 	@test -z "$$(git status --porcelain)"
 
+.PHONY: schema-docs
+schema-docs:
+	@bash scripts/schema-docs.sh
+
+.PHONY: schema-erd
+schema-erd:
+	npm exec --yes --package=@liam-hq/cli@0.7.24 -- liam erd build --format tbls --input docs/schema/schema.json --output-dir tmp/schema-erd
+
 .PHONY: test
 test: go-test
