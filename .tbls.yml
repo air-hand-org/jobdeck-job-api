@@ -1,0 +1,8 @@
+name: jobdeck-job-api
+docPath: docs/schema
+format:
+  sort: true
+er:
+  format: mermaid
+include:
+  - job.*

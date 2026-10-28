@@ -40,6 +40,10 @@ jobs:
           app-private-key: ${{ secrets.GH_APP_RELEASE_PRIVATE_KEY }}
       - name: lint
         run: make lint
+      - name: generate schema documentation
+        run: make schema-docs
+      - name: build interactive schema ERD
+        run: make schema-erd
       - name: check clean
         run: make check-clean
       - name: test

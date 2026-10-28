@@ -1,0 +1,2068 @@
+{
+  "name": "jobdeck-job-api",
+  "tables": [
+    {
+      "name": "job.actor",
+      "type": "VIEW",
+      "columns": [
+        {
+          "name": "active",
+          "type": "boolean",
+          "nullable": true
+        },
+        {
+          "name": "actor_id",
+          "type": "uuid",
+          "nullable": true
+        },
+        {
+          "name": "role",
+          "type": "varchar(20)",
+          "nullable": true
+        },
+        {
+          "name": "type",
+          "type": "varchar(30)",
+          "nullable": true
+        }
+      ],
+      "def": "CREATE VIEW actor AS (\n SELECT ap.actor_id,\n    ap.type,\n    ap.active,\n    ar.role\n   FROM (job.actor_projection ap\n     LEFT JOIN job.actor_role_assignment ar USING (actor_id))\n)",
+      "referenced_tables": [
+        "job.actor_projection",
+        "job.actor_role_assignment"
+      ]
+    },
+    {
+      "name": "job.actor_projection",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "active",
+          "type": "boolean",
+          "nullable": false,
+          "default": "true"
+        },
+        {
+          "name": "actor_id",
+          "type": "uuid",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": "now()"
+        },
+        {
+          "name": "type",
+          "type": "varchar(30)",
+          "nullable": false
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": "now()"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "actor_projection_pkey",
+          "def": "CREATE UNIQUE INDEX actor_projection_pkey ON job.actor_projection USING btree (actor_id)",
+          "table": "job.actor_projection",
+          "columns": [
+            "actor_id"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "actor_projection_active_not_null",
+          "type": "n",
+          "def": "NOT NULL active",
+          "table": "job.actor_projection",
+          "referenced_table": "",
+          "columns": [
+            "active"
+          ]
+        },
+        {
+          "name": "actor_projection_actor_id_not_null",
+          "type": "n",
+          "def": "NOT NULL actor_id",
+          "table": "job.actor_projection",
+          "referenced_table": "",
+          "columns": [
+            "actor_id"
+          ]
+        },
+        {
+          "name": "actor_projection_created_at_not_null",
+          "type": "n",
+          "def": "NOT NULL created_at",
+          "table": "job.actor_projection",
+          "referenced_table": "",
+          "columns": [
+            "created_at"
+          ]
+        },
+        {
+          "name": "actor_projection_pkey",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (actor_id)",
+          "table": "job.actor_projection",
+          "referenced_table": "",
+          "columns": [
+            "actor_id"
+          ]
+        },
+        {
+          "name": "actor_projection_type_not_null",
+          "type": "n",
+          "def": "NOT NULL type",
+          "table": "job.actor_projection",
+          "referenced_table": "",
+          "columns": [
+            "type"
+          ]
+        },
+        {
+          "name": "actor_projection_updated_at_not_null",
+          "type": "n",
+          "def": "NOT NULL updated_at",
+          "table": "job.actor_projection",
+          "referenced_table": "",
+          "columns": [
+            "updated_at"
+          ]
+        }
+      ],
+      "triggers": [
+        {
+          "name": "actor_projection_updated_at",
+          "def": "CREATE TRIGGER actor_projection_updated_at BEFORE UPDATE ON job.actor_projection FOR EACH ROW EXECUTE FUNCTION job.update_updated_at_column()"
+        }
+      ]
+    },
+    {
+      "name": "job.actor_role",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "role",
+          "type": "varchar(20)",
+          "nullable": false
+        }
+      ],
+      "indexes": [
+        {
+          "name": "actor_role_pkey",
+          "def": "CREATE UNIQUE INDEX actor_role_pkey ON job.actor_role USING btree (role)",
+          "table": "job.actor_role",
+          "columns": [
+            "role"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "actor_role_pkey",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (role)",
+          "table": "job.actor_role",
+          "referenced_table": "",
+          "columns": [
+            "role"
+          ]
+        },
+        {
+          "name": "actor_role_role_not_null",
+          "type": "n",
+          "def": "NOT NULL role",
+          "table": "job.actor_role",
+          "referenced_table": "",
+          "columns": [
+            "role"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "job.actor_role_assignment",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "actor_id",
+          "type": "uuid",
+          "nullable": false
+        },
+        {
+          "name": "role",
+          "type": "varchar(20)",
+          "nullable": false
+        }
+      ],
+      "indexes": [
+        {
+          "name": "actor_role_assignment_pkey",
+          "def": "CREATE UNIQUE INDEX actor_role_assignment_pkey ON job.actor_role_assignment USING btree (actor_id)",
+          "table": "job.actor_role_assignment",
+          "columns": [
+            "actor_id"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "actor_role_assignment_actor_id_not_null",
+          "type": "n",
+          "def": "NOT NULL actor_id",
+          "table": "job.actor_role_assignment",
+          "referenced_table": "",
+          "columns": [
+            "actor_id"
+          ]
+        },
+        {
+          "name": "actor_role_assignment_pkey",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (actor_id)",
+          "table": "job.actor_role_assignment",
+          "referenced_table": "",
+          "columns": [
+            "actor_id"
+          ]
+        },
+        {
+          "name": "actor_role_assignment_role_not_null",
+          "type": "n",
+          "def": "NOT NULL role",
+          "table": "job.actor_role_assignment",
+          "referenced_table": "",
+          "columns": [
+            "role"
+          ]
+        },
+        {
+          "name": "fk_actor_id",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (actor_id) REFERENCES job.actor_projection(actor_id)",
+          "table": "job.actor_role_assignment",
+          "referenced_table": "job.actor_projection",
+          "columns": [
+            "actor_id"
+          ],
+          "referenced_columns": [
+            "actor_id"
+          ]
+        },
+        {
+          "name": "fk_role",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (role) REFERENCES job.actor_role(role) ON UPDATE CASCADE",
+          "table": "job.actor_role_assignment",
+          "referenced_table": "job.actor_role",
+          "columns": [
+            "role"
+          ],
+          "referenced_columns": [
+            "role"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "job.execution",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "attempt",
+          "type": "integer",
+          "nullable": false,
+          "default": "0"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": "now()"
+        },
+        {
+          "name": "execution_id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "uuidv7()"
+        },
+        {
+          "name": "job_id",
+          "type": "uuid",
+          "nullable": false
+        },
+        {
+          "name": "job_revision_id",
+          "type": "uuid",
+          "nullable": false
+        },
+        {
+          "name": "lease_expires_at",
+          "type": "timestamp with time zone",
+          "nullable": true
+        },
+        {
+          "name": "lease_token",
+          "type": "uuid",
+          "nullable": true
+        },
+        {
+          "name": "next_run_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": "now()"
+        },
+        {
+          "name": "result",
+          "type": "jsonb",
+          "nullable": true
+        },
+        {
+          "name": "status",
+          "type": "varchar(30)",
+          "nullable": false
+        },
+        {
+          "name": "trigger_type",
+          "type": "varchar(30)",
+          "nullable": false
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": "now()"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "execution_pkey",
+          "def": "CREATE UNIQUE INDEX execution_pkey ON job.execution USING btree (execution_id)",
+          "table": "job.execution",
+          "columns": [
+            "execution_id"
+          ]
+        },
+        {
+          "name": "execution_status_next_run_at_idx",
+          "def": "CREATE INDEX execution_status_next_run_at_idx ON job.execution USING btree (status, next_run_at)",
+          "table": "job.execution",
+          "columns": [
+            "status",
+            "next_run_at"
+          ]
+        },
+        {
+          "name": "job_id_idx",
+          "def": "CREATE INDEX job_id_idx ON job.execution USING btree (job_id)",
+          "table": "job.execution",
+          "columns": [
+            "job_id"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "execution_attempt_not_null",
+          "type": "n",
+          "def": "NOT NULL attempt",
+          "table": "job.execution",
+          "referenced_table": "",
+          "columns": [
+            "attempt"
+          ]
+        },
+        {
+          "name": "execution_created_at_not_null",
+          "type": "n",
+          "def": "NOT NULL created_at",
+          "table": "job.execution",
+          "referenced_table": "",
+          "columns": [
+            "created_at"
+          ]
+        },
+        {
+          "name": "execution_execution_id_not_null",
+          "type": "n",
+          "def": "NOT NULL execution_id",
+          "table": "job.execution",
+          "referenced_table": "",
+          "columns": [
+            "execution_id"
+          ]
+        },
+        {
+          "name": "execution_job_id_fkey",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (job_id) REFERENCES job.job(job_id) ON DELETE CASCADE",
+          "table": "job.execution",
+          "referenced_table": "job.job",
+          "columns": [
+            "job_id"
+          ],
+          "referenced_columns": [
+            "job_id"
+          ]
+        },
+        {
+          "name": "execution_job_id_not_null",
+          "type": "n",
+          "def": "NOT NULL job_id",
+          "table": "job.execution",
+          "referenced_table": "",
+          "columns": [
+            "job_id"
+          ]
+        },
+        {
+          "name": "execution_job_revision_id_not_null",
+          "type": "n",
+          "def": "NOT NULL job_revision_id",
+          "table": "job.execution",
+          "referenced_table": "",
+          "columns": [
+            "job_revision_id"
+          ]
+        },
+        {
+          "name": "execution_next_run_at_not_null",
+          "type": "n",
+          "def": "NOT NULL next_run_at",
+          "table": "job.execution",
+          "referenced_table": "",
+          "columns": [
+            "next_run_at"
+          ]
+        },
+        {
+          "name": "execution_pkey",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (execution_id)",
+          "table": "job.execution",
+          "referenced_table": "",
+          "columns": [
+            "execution_id"
+          ]
+        },
+        {
+          "name": "execution_status_fkey",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (status) REFERENCES job.execution_event_status(status) ON UPDATE CASCADE",
+          "table": "job.execution",
+          "referenced_table": "job.execution_event_status",
+          "columns": [
+            "status"
+          ],
+          "referenced_columns": [
+            "status"
+          ]
+        },
+        {
+          "name": "execution_status_not_null",
+          "type": "n",
+          "def": "NOT NULL status",
+          "table": "job.execution",
+          "referenced_table": "",
+          "columns": [
+            "status"
+          ]
+        },
+        {
+          "name": "execution_trigger_type_fkey",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (trigger_type) REFERENCES job.execution_trigger(trigger_type) ON UPDATE CASCADE",
+          "table": "job.execution",
+          "referenced_table": "job.execution_trigger",
+          "columns": [
+            "trigger_type"
+          ],
+          "referenced_columns": [
+            "trigger_type"
+          ]
+        },
+        {
+          "name": "execution_trigger_type_not_null",
+          "type": "n",
+          "def": "NOT NULL trigger_type",
+          "table": "job.execution",
+          "referenced_table": "",
+          "columns": [
+            "trigger_type"
+          ]
+        },
+        {
+          "name": "execution_updated_at_not_null",
+          "type": "n",
+          "def": "NOT NULL updated_at",
+          "table": "job.execution",
+          "referenced_table": "",
+          "columns": [
+            "updated_at"
+          ]
+        },
+        {
+          "name": "fk_job_id_rev_id",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (job_id, job_revision_id) REFERENCES job.job_revision(job_id, revision_id)",
+          "table": "job.execution",
+          "referenced_table": "job.job_revision",
+          "columns": [
+            "job_id",
+            "job_revision_id"
+          ],
+          "referenced_columns": [
+            "job_id",
+            "revision_id"
+          ]
+        }
+      ],
+      "triggers": [
+        {
+          "name": "execution_updated_at",
+          "def": "CREATE TRIGGER execution_updated_at BEFORE UPDATE ON job.execution FOR EACH ROW EXECUTE FUNCTION job.update_updated_at_column()"
+        }
+      ]
+    },
+    {
+      "name": "job.execution_claim_detail",
+      "type": "VIEW",
+      "columns": [
+        {
+          "name": "attempt",
+          "type": "integer",
+          "nullable": true
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true
+        },
+        {
+          "name": "execution_id",
+          "type": "uuid",
+          "nullable": true
+        },
+        {
+          "name": "job_config",
+          "type": "jsonb",
+          "nullable": true
+        },
+        {
+          "name": "job_id",
+          "type": "uuid",
+          "nullable": true
+        },
+        {
+          "name": "job_revision_id",
+          "type": "uuid",
+          "nullable": true
+        },
+        {
+          "name": "job_type",
+          "type": "varchar(30)",
+          "nullable": true
+        },
+        {
+          "name": "lease_expires_at",
+          "type": "timestamp with time zone",
+          "nullable": true
+        },
+        {
+          "name": "lease_token",
+          "type": "uuid",
+          "nullable": true
+        }
+      ],
+      "def": "CREATE VIEW execution_claim_detail AS (\n SELECT e.execution_id,\n    e.job_id,\n    e.job_revision_id,\n    e.attempt,\n    e.lease_token,\n    e.lease_expires_at,\n    r.type AS job_type,\n    r.config AS job_config,\n    e.created_at\n   FROM (job.execution e\n     JOIN job.job_revision r ON (((e.job_id = r.job_id) AND (e.job_revision_id = r.revision_id))))\n)",
+      "referenced_tables": [
+        "job.execution",
+        "job.job_revision"
+      ]
+    },
+    {
+      "name": "job.execution_detail",
+      "type": "VIEW",
+      "columns": [
+        {
+          "name": "attempt",
+          "type": "integer",
+          "nullable": true
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true
+        },
+        {
+          "name": "current_status",
+          "type": "varchar(30)",
+          "nullable": true
+        },
+        {
+          "name": "execution_id",
+          "type": "uuid",
+          "nullable": true
+        },
+        {
+          "name": "job_config",
+          "type": "jsonb",
+          "nullable": true
+        },
+        {
+          "name": "job_id",
+          "type": "uuid",
+          "nullable": true
+        },
+        {
+          "name": "job_owner_id",
+          "type": "uuid",
+          "nullable": true
+        },
+        {
+          "name": "job_retry_backoff_type",
+          "type": "varchar(50)",
+          "nullable": true
+        },
+        {
+          "name": "job_retry_initial_delay_ms",
+          "type": "bigint",
+          "nullable": true
+        },
+        {
+          "name": "job_retry_max_attempts",
+          "type": "integer",
+          "nullable": true
+        },
+        {
+          "name": "job_retry_max_delay_ms",
+          "type": "bigint",
+          "nullable": true
+        },
+        {
+          "name": "job_revision_id",
+          "type": "uuid",
+          "nullable": true
+        },
+        {
+          "name": "job_type",
+          "type": "varchar(30)",
+          "nullable": true
+        },
+        {
+          "name": "lease_expires_at",
+          "type": "timestamp with time zone",
+          "nullable": true
+        },
+        {
+          "name": "lease_token",
+          "type": "uuid",
+          "nullable": true
+        },
+        {
+          "name": "next_run_at",
+          "type": "timestamp with time zone",
+          "nullable": true
+        },
+        {
+          "name": "result",
+          "type": "jsonb",
+          "nullable": true
+        },
+        {
+          "name": "trigger_type",
+          "type": "varchar(30)",
+          "nullable": true
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true
+        }
+      ],
+      "def": "CREATE VIEW execution_detail AS (\n SELECT e.execution_id,\n    e.job_id,\n    j.owner_id AS job_owner_id,\n    e.job_revision_id,\n    e.trigger_type,\n    e.status AS current_status,\n    e.attempt,\n    e.lease_token,\n    e.lease_expires_at,\n    e.next_run_at,\n    e.result,\n    e.created_at,\n    e.updated_at,\n    r.type AS job_type,\n    r.config AS job_config,\n    r.retry_max_attempts AS job_retry_max_attempts,\n    r.retry_backoff_type AS job_retry_backoff_type,\n    r.retry_initial_delay_ms AS job_retry_initial_delay_ms,\n    r.retry_max_delay_ms AS job_retry_max_delay_ms\n   FROM ((job.execution e\n     JOIN job.job_revision r ON (((e.job_id = r.job_id) AND (e.job_revision_id = r.revision_id))))\n     JOIN job.job j ON ((e.job_id = j.job_id)))\n)",
+      "referenced_tables": [
+        "job.execution",
+        "job.job_revision",
+        "job.job"
+      ]
+    },
+    {
+      "name": "job.execution_event",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": "now()"
+        },
+        {
+          "name": "execution_event_id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "uuidv7()"
+        },
+        {
+          "name": "execution_id",
+          "type": "uuid",
+          "nullable": false
+        },
+        {
+          "name": "status",
+          "type": "varchar(30)",
+          "nullable": false
+        }
+      ],
+      "indexes": [
+        {
+          "name": "execution_event_execution_id_idx",
+          "def": "CREATE INDEX execution_event_execution_id_idx ON job.execution_event USING btree (execution_id)",
+          "table": "job.execution_event",
+          "columns": [
+            "execution_id"
+          ]
+        },
+        {
+          "name": "execution_event_pkey",
+          "def": "CREATE UNIQUE INDEX execution_event_pkey ON job.execution_event USING btree (execution_event_id)",
+          "table": "job.execution_event",
+          "columns": [
+            "execution_event_id"
+          ]
+        },
+        {
+          "name": "execution_event_status_idx",
+          "def": "CREATE INDEX execution_event_status_idx ON job.execution_event USING btree (status)",
+          "table": "job.execution_event",
+          "columns": [
+            "status"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "execution_event_created_at_not_null",
+          "type": "n",
+          "def": "NOT NULL created_at",
+          "table": "job.execution_event",
+          "referenced_table": "",
+          "columns": [
+            "created_at"
+          ]
+        },
+        {
+          "name": "execution_event_execution_event_id_not_null",
+          "type": "n",
+          "def": "NOT NULL execution_event_id",
+          "table": "job.execution_event",
+          "referenced_table": "",
+          "columns": [
+            "execution_event_id"
+          ]
+        },
+        {
+          "name": "execution_event_execution_id_fkey",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (execution_id) REFERENCES job.execution(execution_id) ON DELETE CASCADE",
+          "table": "job.execution_event",
+          "referenced_table": "job.execution",
+          "columns": [
+            "execution_id"
+          ],
+          "referenced_columns": [
+            "execution_id"
+          ]
+        },
+        {
+          "name": "execution_event_execution_id_not_null",
+          "type": "n",
+          "def": "NOT NULL execution_id",
+          "table": "job.execution_event",
+          "referenced_table": "",
+          "columns": [
+            "execution_id"
+          ]
+        },
+        {
+          "name": "execution_event_pkey",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (execution_event_id)",
+          "table": "job.execution_event",
+          "referenced_table": "",
+          "columns": [
+            "execution_event_id"
+          ]
+        },
+        {
+          "name": "execution_event_status_fkey",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (status) REFERENCES job.execution_event_status(status) ON UPDATE CASCADE",
+          "table": "job.execution_event",
+          "referenced_table": "job.execution_event_status",
+          "columns": [
+            "status"
+          ],
+          "referenced_columns": [
+            "status"
+          ]
+        },
+        {
+          "name": "execution_event_status_not_null",
+          "type": "n",
+          "def": "NOT NULL status",
+          "table": "job.execution_event",
+          "referenced_table": "",
+          "columns": [
+            "status"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "job.execution_event_status",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "active",
+          "type": "boolean",
+          "nullable": false,
+          "default": "true"
+        },
+        {
+          "name": "status",
+          "type": "varchar(30)",
+          "nullable": false
+        }
+      ],
+      "indexes": [
+        {
+          "name": "execution_event_status_pkey",
+          "def": "CREATE UNIQUE INDEX execution_event_status_pkey ON job.execution_event_status USING btree (status)",
+          "table": "job.execution_event_status",
+          "columns": [
+            "status"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "execution_event_status_active_not_null",
+          "type": "n",
+          "def": "NOT NULL active",
+          "table": "job.execution_event_status",
+          "referenced_table": "",
+          "columns": [
+            "active"
+          ]
+        },
+        {
+          "name": "execution_event_status_pkey",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (status)",
+          "table": "job.execution_event_status",
+          "referenced_table": "",
+          "columns": [
+            "status"
+          ]
+        },
+        {
+          "name": "execution_event_status_status_not_null",
+          "type": "n",
+          "def": "NOT NULL status",
+          "table": "job.execution_event_status",
+          "referenced_table": "",
+          "columns": [
+            "status"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "job.execution_trigger",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "trigger_type",
+          "type": "varchar(30)",
+          "nullable": false
+        }
+      ],
+      "indexes": [
+        {
+          "name": "execution_trigger_pkey",
+          "def": "CREATE UNIQUE INDEX execution_trigger_pkey ON job.execution_trigger USING btree (trigger_type)",
+          "table": "job.execution_trigger",
+          "columns": [
+            "trigger_type"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "execution_trigger_pkey",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (trigger_type)",
+          "table": "job.execution_trigger",
+          "referenced_table": "",
+          "columns": [
+            "trigger_type"
+          ]
+        },
+        {
+          "name": "execution_trigger_trigger_type_not_null",
+          "type": "n",
+          "def": "NOT NULL trigger_type",
+          "table": "job.execution_trigger",
+          "referenced_table": "",
+          "columns": [
+            "trigger_type"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "job.job",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": "now()"
+        },
+        {
+          "name": "enabled",
+          "type": "boolean",
+          "nullable": false,
+          "default": "true"
+        },
+        {
+          "name": "job_id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "uuidv7()"
+        },
+        {
+          "name": "name",
+          "type": "varchar(255)",
+          "nullable": false
+        },
+        {
+          "name": "owner_id",
+          "type": "uuid",
+          "nullable": false
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": "now()"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "job_created_at_job_id",
+          "def": "CREATE INDEX job_created_at_job_id ON job.job USING btree (created_at, job_id)",
+          "table": "job.job",
+          "columns": [
+            "created_at",
+            "job_id"
+          ]
+        },
+        {
+          "name": "job_owner_id_idx",
+          "def": "CREATE INDEX job_owner_id_idx ON job.job USING btree (owner_id)",
+          "table": "job.job",
+          "columns": [
+            "owner_id"
+          ]
+        },
+        {
+          "name": "job_pkey",
+          "def": "CREATE UNIQUE INDEX job_pkey ON job.job USING btree (job_id)",
+          "table": "job.job",
+          "columns": [
+            "job_id"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "job_created_at_not_null",
+          "type": "n",
+          "def": "NOT NULL created_at",
+          "table": "job.job",
+          "referenced_table": "",
+          "columns": [
+            "created_at"
+          ]
+        },
+        {
+          "name": "job_enabled_not_null",
+          "type": "n",
+          "def": "NOT NULL enabled",
+          "table": "job.job",
+          "referenced_table": "",
+          "columns": [
+            "enabled"
+          ]
+        },
+        {
+          "name": "job_job_id_not_null",
+          "type": "n",
+          "def": "NOT NULL job_id",
+          "table": "job.job",
+          "referenced_table": "",
+          "columns": [
+            "job_id"
+          ]
+        },
+        {
+          "name": "job_name_not_null",
+          "type": "n",
+          "def": "NOT NULL name",
+          "table": "job.job",
+          "referenced_table": "",
+          "columns": [
+            "name"
+          ]
+        },
+        {
+          "name": "job_owner_id_not_null",
+          "type": "n",
+          "def": "NOT NULL owner_id",
+          "table": "job.job",
+          "referenced_table": "",
+          "columns": [
+            "owner_id"
+          ]
+        },
+        {
+          "name": "job_pkey",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (job_id)",
+          "table": "job.job",
+          "referenced_table": "",
+          "columns": [
+            "job_id"
+          ]
+        },
+        {
+          "name": "job_updated_at_not_null",
+          "type": "n",
+          "def": "NOT NULL updated_at",
+          "table": "job.job",
+          "referenced_table": "",
+          "columns": [
+            "updated_at"
+          ]
+        }
+      ],
+      "triggers": [
+        {
+          "name": "job_updated_at",
+          "def": "CREATE TRIGGER job_updated_at BEFORE UPDATE ON job.job FOR EACH ROW EXECUTE FUNCTION job.update_updated_at_column()"
+        }
+      ]
+    },
+    {
+      "name": "job.job_current_revision",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "job_id",
+          "type": "uuid",
+          "nullable": false
+        },
+        {
+          "name": "revision_id",
+          "type": "uuid",
+          "nullable": false
+        }
+      ],
+      "indexes": [
+        {
+          "name": "job_current_revision_pkey",
+          "def": "CREATE UNIQUE INDEX job_current_revision_pkey ON job.job_current_revision USING btree (job_id)",
+          "table": "job.job_current_revision",
+          "columns": [
+            "job_id"
+          ]
+        },
+        {
+          "name": "uq_rev_id",
+          "def": "CREATE UNIQUE INDEX uq_rev_id ON job.job_current_revision USING btree (revision_id)",
+          "table": "job.job_current_revision",
+          "columns": [
+            "revision_id"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "fk_job_id",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (job_id) REFERENCES job.job(job_id) ON DELETE CASCADE",
+          "table": "job.job_current_revision",
+          "referenced_table": "job.job",
+          "columns": [
+            "job_id"
+          ],
+          "referenced_columns": [
+            "job_id"
+          ]
+        },
+        {
+          "name": "fk_job_id_rev_id",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (job_id, revision_id) REFERENCES job.job_revision(job_id, revision_id)",
+          "table": "job.job_current_revision",
+          "referenced_table": "job.job_revision",
+          "columns": [
+            "job_id",
+            "revision_id"
+          ],
+          "referenced_columns": [
+            "job_id",
+            "revision_id"
+          ]
+        },
+        {
+          "name": "job_current_revision_job_id_not_null",
+          "type": "n",
+          "def": "NOT NULL job_id",
+          "table": "job.job_current_revision",
+          "referenced_table": "",
+          "columns": [
+            "job_id"
+          ]
+        },
+        {
+          "name": "job_current_revision_pkey",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (job_id)",
+          "table": "job.job_current_revision",
+          "referenced_table": "",
+          "columns": [
+            "job_id"
+          ]
+        },
+        {
+          "name": "job_current_revision_revision_id_not_null",
+          "type": "n",
+          "def": "NOT NULL revision_id",
+          "table": "job.job_current_revision",
+          "referenced_table": "",
+          "columns": [
+            "revision_id"
+          ]
+        },
+        {
+          "name": "uq_rev_id",
+          "type": "UNIQUE",
+          "def": "UNIQUE (revision_id)",
+          "table": "job.job_current_revision",
+          "referenced_table": "",
+          "columns": [
+            "revision_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "job.job_detail",
+      "type": "VIEW",
+      "columns": [
+        {
+          "name": "config",
+          "type": "jsonb",
+          "nullable": true
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true
+        },
+        {
+          "name": "enabled",
+          "type": "boolean",
+          "nullable": true
+        },
+        {
+          "name": "job_id",
+          "type": "uuid",
+          "nullable": true
+        },
+        {
+          "name": "name",
+          "type": "varchar(255)",
+          "nullable": true
+        },
+        {
+          "name": "owner_id",
+          "type": "uuid",
+          "nullable": true
+        },
+        {
+          "name": "retry_backoff_type",
+          "type": "varchar(50)",
+          "nullable": true
+        },
+        {
+          "name": "retry_initial_delay_ms",
+          "type": "bigint",
+          "nullable": true
+        },
+        {
+          "name": "retry_max_attempts",
+          "type": "integer",
+          "nullable": true
+        },
+        {
+          "name": "retry_max_delay_ms",
+          "type": "bigint",
+          "nullable": true
+        },
+        {
+          "name": "type",
+          "type": "varchar(30)",
+          "nullable": true
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true
+        }
+      ],
+      "def": "CREATE VIEW job_detail AS (\n SELECT j.job_id,\n    j.owner_id,\n    j.enabled,\n    j.name,\n    j.created_at,\n    j.updated_at,\n    r.type,\n    r.config,\n    r.retry_max_attempts,\n    r.retry_backoff_type,\n    r.retry_initial_delay_ms,\n    r.retry_max_delay_ms\n   FROM ((job.job j\n     JOIN job.job_current_revision cr ON ((j.job_id = cr.job_id)))\n     JOIN job.job_revision r ON (((cr.job_id = r.job_id) AND (cr.revision_id = r.revision_id))))\n)",
+      "referenced_tables": [
+        "job.job",
+        "job.job_current_revision",
+        "job.job_revision"
+      ]
+    },
+    {
+      "name": "job.job_retry_backoff_type",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "type",
+          "type": "varchar(50)",
+          "nullable": false
+        }
+      ],
+      "indexes": [
+        {
+          "name": "job_retry_backoff_type_pkey",
+          "def": "CREATE UNIQUE INDEX job_retry_backoff_type_pkey ON job.job_retry_backoff_type USING btree (type)",
+          "table": "job.job_retry_backoff_type",
+          "columns": [
+            "type"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "job_retry_backoff_type_pkey",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (type)",
+          "table": "job.job_retry_backoff_type",
+          "referenced_table": "",
+          "columns": [
+            "type"
+          ]
+        },
+        {
+          "name": "job_retry_backoff_type_type_not_null",
+          "type": "n",
+          "def": "NOT NULL type",
+          "table": "job.job_retry_backoff_type",
+          "referenced_table": "",
+          "columns": [
+            "type"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "job.job_revision",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "config",
+          "type": "jsonb",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": "now()"
+        },
+        {
+          "name": "job_id",
+          "type": "uuid",
+          "nullable": false
+        },
+        {
+          "name": "retry_backoff_type",
+          "type": "varchar(50)",
+          "nullable": false
+        },
+        {
+          "name": "retry_initial_delay_ms",
+          "type": "bigint",
+          "nullable": false,
+          "default": "0"
+        },
+        {
+          "name": "retry_max_attempts",
+          "type": "integer",
+          "nullable": false,
+          "default": "1"
+        },
+        {
+          "name": "retry_max_delay_ms",
+          "type": "bigint",
+          "nullable": false
+        },
+        {
+          "name": "revision_id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "uuidv7()"
+        },
+        {
+          "name": "revision_number",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "type",
+          "type": "varchar(30)",
+          "nullable": false
+        }
+      ],
+      "indexes": [
+        {
+          "name": "job_revision_job_id_created_at_idx",
+          "def": "CREATE INDEX job_revision_job_id_created_at_idx ON job.job_revision USING btree (job_id, created_at DESC)",
+          "table": "job.job_revision",
+          "columns": [
+            "job_id",
+            "created_at"
+          ]
+        },
+        {
+          "name": "job_revision_pkey",
+          "def": "CREATE UNIQUE INDEX job_revision_pkey ON job.job_revision USING btree (revision_id)",
+          "table": "job.job_revision",
+          "columns": [
+            "revision_id"
+          ]
+        },
+        {
+          "name": "uq_job_id_rev_id",
+          "def": "CREATE UNIQUE INDEX uq_job_id_rev_id ON job.job_revision USING btree (job_id, revision_id)",
+          "table": "job.job_revision",
+          "columns": [
+            "job_id",
+            "revision_id"
+          ]
+        },
+        {
+          "name": "uq_job_id_rev_number",
+          "def": "CREATE UNIQUE INDEX uq_job_id_rev_number ON job.job_revision USING btree (job_id, revision_number)",
+          "table": "job.job_revision",
+          "columns": [
+            "job_id",
+            "revision_number"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "fk_job_id",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (job_id) REFERENCES job.job(job_id) ON DELETE CASCADE",
+          "table": "job.job_revision",
+          "referenced_table": "job.job",
+          "columns": [
+            "job_id"
+          ],
+          "referenced_columns": [
+            "job_id"
+          ]
+        },
+        {
+          "name": "fk_job_retry_backoff_type",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (retry_backoff_type) REFERENCES job.job_retry_backoff_type(type) ON UPDATE CASCADE",
+          "table": "job.job_revision",
+          "referenced_table": "job.job_retry_backoff_type",
+          "columns": [
+            "retry_backoff_type"
+          ],
+          "referenced_columns": [
+            "type"
+          ]
+        },
+        {
+          "name": "fk_job_type",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (type) REFERENCES job.job_type(type) ON UPDATE CASCADE",
+          "table": "job.job_revision",
+          "referenced_table": "job.job_type",
+          "columns": [
+            "type"
+          ],
+          "referenced_columns": [
+            "type"
+          ]
+        },
+        {
+          "name": "job_revision_config_not_null",
+          "type": "n",
+          "def": "NOT NULL config",
+          "table": "job.job_revision",
+          "referenced_table": "",
+          "columns": [
+            "config"
+          ]
+        },
+        {
+          "name": "job_revision_created_at_not_null",
+          "type": "n",
+          "def": "NOT NULL created_at",
+          "table": "job.job_revision",
+          "referenced_table": "",
+          "columns": [
+            "created_at"
+          ]
+        },
+        {
+          "name": "job_revision_job_id_not_null",
+          "type": "n",
+          "def": "NOT NULL job_id",
+          "table": "job.job_revision",
+          "referenced_table": "",
+          "columns": [
+            "job_id"
+          ]
+        },
+        {
+          "name": "job_revision_pkey",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (revision_id)",
+          "table": "job.job_revision",
+          "referenced_table": "",
+          "columns": [
+            "revision_id"
+          ]
+        },
+        {
+          "name": "job_revision_retry_backoff_type_not_null",
+          "type": "n",
+          "def": "NOT NULL retry_backoff_type",
+          "table": "job.job_revision",
+          "referenced_table": "",
+          "columns": [
+            "retry_backoff_type"
+          ]
+        },
+        {
+          "name": "job_revision_retry_initial_delay_ms_not_null",
+          "type": "n",
+          "def": "NOT NULL retry_initial_delay_ms",
+          "table": "job.job_revision",
+          "referenced_table": "",
+          "columns": [
+            "retry_initial_delay_ms"
+          ]
+        },
+        {
+          "name": "job_revision_retry_max_attempts_not_null",
+          "type": "n",
+          "def": "NOT NULL retry_max_attempts",
+          "table": "job.job_revision",
+          "referenced_table": "",
+          "columns": [
+            "retry_max_attempts"
+          ]
+        },
+        {
+          "name": "job_revision_retry_max_delay_ms_not_null",
+          "type": "n",
+          "def": "NOT NULL retry_max_delay_ms",
+          "table": "job.job_revision",
+          "referenced_table": "",
+          "columns": [
+            "retry_max_delay_ms"
+          ]
+        },
+        {
+          "name": "job_revision_revision_id_not_null",
+          "type": "n",
+          "def": "NOT NULL revision_id",
+          "table": "job.job_revision",
+          "referenced_table": "",
+          "columns": [
+            "revision_id"
+          ]
+        },
+        {
+          "name": "job_revision_revision_number_not_null",
+          "type": "n",
+          "def": "NOT NULL revision_number",
+          "table": "job.job_revision",
+          "referenced_table": "",
+          "columns": [
+            "revision_number"
+          ]
+        },
+        {
+          "name": "job_revision_type_not_null",
+          "type": "n",
+          "def": "NOT NULL type",
+          "table": "job.job_revision",
+          "referenced_table": "",
+          "columns": [
+            "type"
+          ]
+        },
+        {
+          "name": "uq_job_id_rev_id",
+          "type": "UNIQUE",
+          "def": "UNIQUE (job_id, revision_id)",
+          "table": "job.job_revision",
+          "referenced_table": "",
+          "columns": [
+            "job_id",
+            "revision_id"
+          ]
+        },
+        {
+          "name": "uq_job_id_rev_number",
+          "type": "UNIQUE",
+          "def": "UNIQUE (job_id, revision_number)",
+          "table": "job.job_revision",
+          "referenced_table": "",
+          "columns": [
+            "job_id",
+            "revision_number"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "job.job_type",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "active",
+          "type": "boolean",
+          "nullable": false,
+          "default": "true"
+        },
+        {
+          "name": "type",
+          "type": "varchar(30)",
+          "nullable": false
+        }
+      ],
+      "indexes": [
+        {
+          "name": "job_type_pkey",
+          "def": "CREATE UNIQUE INDEX job_type_pkey ON job.job_type USING btree (type)",
+          "table": "job.job_type",
+          "columns": [
+            "type"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "job_type_active_not_null",
+          "type": "n",
+          "def": "NOT NULL active",
+          "table": "job.job_type",
+          "referenced_table": "",
+          "columns": [
+            "active"
+          ]
+        },
+        {
+          "name": "job_type_pkey",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (type)",
+          "table": "job.job_type",
+          "referenced_table": "",
+          "columns": [
+            "type"
+          ]
+        },
+        {
+          "name": "job_type_type_not_null",
+          "type": "n",
+          "def": "NOT NULL type",
+          "table": "job.job_type",
+          "referenced_table": "",
+          "columns": [
+            "type"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "job.outbox_execution_completed",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "completed_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": "now()"
+        },
+        {
+          "name": "execution_id",
+          "type": "uuid",
+          "nullable": false
+        },
+        {
+          "name": "published_at",
+          "type": "timestamp with time zone",
+          "nullable": false
+        },
+        {
+          "name": "requested_at",
+          "type": "timestamp with time zone",
+          "nullable": false
+        }
+      ],
+      "indexes": [
+        {
+          "name": "outbox_execution_completed_pkey",
+          "def": "CREATE UNIQUE INDEX outbox_execution_completed_pkey ON job.outbox_execution_completed USING btree (execution_id)",
+          "table": "job.outbox_execution_completed",
+          "columns": [
+            "execution_id"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "outbox_execution_completed_completed_at_not_null",
+          "type": "n",
+          "def": "NOT NULL completed_at",
+          "table": "job.outbox_execution_completed",
+          "referenced_table": "",
+          "columns": [
+            "completed_at"
+          ]
+        },
+        {
+          "name": "outbox_execution_completed_execution_id_not_null",
+          "type": "n",
+          "def": "NOT NULL execution_id",
+          "table": "job.outbox_execution_completed",
+          "referenced_table": "",
+          "columns": [
+            "execution_id"
+          ]
+        },
+        {
+          "name": "outbox_execution_completed_pkey",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (execution_id)",
+          "table": "job.outbox_execution_completed",
+          "referenced_table": "",
+          "columns": [
+            "execution_id"
+          ]
+        },
+        {
+          "name": "outbox_execution_completed_published_at_not_null",
+          "type": "n",
+          "def": "NOT NULL published_at",
+          "table": "job.outbox_execution_completed",
+          "referenced_table": "",
+          "columns": [
+            "published_at"
+          ]
+        },
+        {
+          "name": "outbox_execution_completed_requested_at_not_null",
+          "type": "n",
+          "def": "NOT NULL requested_at",
+          "table": "job.outbox_execution_completed",
+          "referenced_table": "",
+          "columns": [
+            "requested_at"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "job.outbox_execution_requested",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": "now()"
+        },
+        {
+          "name": "execution_id",
+          "type": "uuid",
+          "nullable": false
+        },
+        {
+          "name": "published_at",
+          "type": "timestamp with time zone",
+          "nullable": true
+        },
+        {
+          "name": "status",
+          "type": "varchar(20)",
+          "nullable": false,
+          "default": "'REQUESTED'::character varying"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "outbox_execution_requested_pkey",
+          "def": "CREATE UNIQUE INDEX outbox_execution_requested_pkey ON job.outbox_execution_requested USING btree (execution_id)",
+          "table": "job.outbox_execution_requested",
+          "columns": [
+            "execution_id"
+          ]
+        },
+        {
+          "name": "outbox_execution_requested_status_created_at",
+          "def": "CREATE INDEX outbox_execution_requested_status_created_at ON job.outbox_execution_requested USING btree (status, created_at)",
+          "table": "job.outbox_execution_requested",
+          "columns": [
+            "status",
+            "created_at"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "fk_status",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (status) REFERENCES job.outbox_execution_status(status)",
+          "table": "job.outbox_execution_requested",
+          "referenced_table": "job.outbox_execution_status",
+          "columns": [
+            "status"
+          ],
+          "referenced_columns": [
+            "status"
+          ]
+        },
+        {
+          "name": "outbox_execution_requested_created_at_not_null",
+          "type": "n",
+          "def": "NOT NULL created_at",
+          "table": "job.outbox_execution_requested",
+          "referenced_table": "",
+          "columns": [
+            "created_at"
+          ]
+        },
+        {
+          "name": "outbox_execution_requested_execution_id_not_null",
+          "type": "n",
+          "def": "NOT NULL execution_id",
+          "table": "job.outbox_execution_requested",
+          "referenced_table": "",
+          "columns": [
+            "execution_id"
+          ]
+        },
+        {
+          "name": "outbox_execution_requested_pkey",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (execution_id)",
+          "table": "job.outbox_execution_requested",
+          "referenced_table": "",
+          "columns": [
+            "execution_id"
+          ]
+        },
+        {
+          "name": "outbox_execution_requested_status_not_null",
+          "type": "n",
+          "def": "NOT NULL status",
+          "table": "job.outbox_execution_requested",
+          "referenced_table": "",
+          "columns": [
+            "status"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "job.outbox_execution_status",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "status",
+          "type": "varchar(20)",
+          "nullable": false
+        }
+      ],
+      "indexes": [
+        {
+          "name": "outbox_execution_status_pkey",
+          "def": "CREATE UNIQUE INDEX outbox_execution_status_pkey ON job.outbox_execution_status USING btree (status)",
+          "table": "job.outbox_execution_status",
+          "columns": [
+            "status"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "outbox_execution_status_pkey",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (status)",
+          "table": "job.outbox_execution_status",
+          "referenced_table": "",
+          "columns": [
+            "status"
+          ]
+        },
+        {
+          "name": "outbox_execution_status_status_not_null",
+          "type": "n",
+          "def": "NOT NULL status",
+          "table": "job.outbox_execution_status",
+          "referenced_table": "",
+          "columns": [
+            "status"
+          ]
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "table": "job.actor_role_assignment",
+      "columns": [
+        "role"
+      ],
+      "cardinality": "zero_or_more",
+      "parent_table": "job.actor_role",
+      "parent_columns": [
+        "role"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (role) REFERENCES job.actor_role(role) ON UPDATE CASCADE"
+    },
+    {
+      "table": "job.actor_role_assignment",
+      "columns": [
+        "actor_id"
+      ],
+      "cardinality": "zero_or_one",
+      "parent_table": "job.actor_projection",
+      "parent_columns": [
+        "actor_id"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (actor_id) REFERENCES job.actor_projection(actor_id)"
+    },
+    {
+      "table": "job.execution",
+      "columns": [
+        "job_id"
+      ],
+      "cardinality": "zero_or_more",
+      "parent_table": "job.job",
+      "parent_columns": [
+        "job_id"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (job_id) REFERENCES job.job(job_id) ON DELETE CASCADE"
+    },
+    {
+      "table": "job.execution",
+      "columns": [
+        "status"
+      ],
+      "cardinality": "zero_or_more",
+      "parent_table": "job.execution_event_status",
+      "parent_columns": [
+        "status"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (status) REFERENCES job.execution_event_status(status) ON UPDATE CASCADE"
+    },
+    {
+      "table": "job.execution",
+      "columns": [
+        "trigger_type"
+      ],
+      "cardinality": "zero_or_more",
+      "parent_table": "job.execution_trigger",
+      "parent_columns": [
+        "trigger_type"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (trigger_type) REFERENCES job.execution_trigger(trigger_type) ON UPDATE CASCADE"
+    },
+    {
+      "table": "job.execution",
+      "columns": [
+        "job_id",
+        "job_revision_id"
+      ],
+      "cardinality": "zero_or_more",
+      "parent_table": "job.job_revision",
+      "parent_columns": [
+        "job_id",
+        "revision_id"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (job_id, job_revision_id) REFERENCES job.job_revision(job_id, revision_id)"
+    },
+    {
+      "table": "job.execution_event",
+      "columns": [
+        "status"
+      ],
+      "cardinality": "zero_or_more",
+      "parent_table": "job.execution_event_status",
+      "parent_columns": [
+        "status"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (status) REFERENCES job.execution_event_status(status) ON UPDATE CASCADE"
+    },
+    {
+      "table": "job.execution_event",
+      "columns": [
+        "execution_id"
+      ],
+      "cardinality": "zero_or_more",
+      "parent_table": "job.execution",
+      "parent_columns": [
+        "execution_id"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (execution_id) REFERENCES job.execution(execution_id) ON DELETE CASCADE"
+    },
+    {
+      "table": "job.job_current_revision",
+      "columns": [
+        "job_id"
+      ],
+      "cardinality": "zero_or_one",
+      "parent_table": "job.job",
+      "parent_columns": [
+        "job_id"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (job_id) REFERENCES job.job(job_id) ON DELETE CASCADE"
+    },
+    {
+      "table": "job.job_current_revision",
+      "columns": [
+        "job_id",
+        "revision_id"
+      ],
+      "cardinality": "zero_or_more",
+      "parent_table": "job.job_revision",
+      "parent_columns": [
+        "job_id",
+        "revision_id"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (job_id, revision_id) REFERENCES job.job_revision(job_id, revision_id)"
+    },
+    {
+      "table": "job.job_revision",
+      "columns": [
+        "type"
+      ],
+      "cardinality": "zero_or_more",
+      "parent_table": "job.job_type",
+      "parent_columns": [
+        "type"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (type) REFERENCES job.job_type(type) ON UPDATE CASCADE"
+    },
+    {
+      "table": "job.job_revision",
+      "columns": [
+        "retry_backoff_type"
+      ],
+      "cardinality": "zero_or_more",
+      "parent_table": "job.job_retry_backoff_type",
+      "parent_columns": [
+        "type"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (retry_backoff_type) REFERENCES job.job_retry_backoff_type(type) ON UPDATE CASCADE"
+    },
+    {
+      "table": "job.job_revision",
+      "columns": [
+        "job_id"
+      ],
+      "cardinality": "zero_or_more",
+      "parent_table": "job.job",
+      "parent_columns": [
+        "job_id"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (job_id) REFERENCES job.job(job_id) ON DELETE CASCADE"
+    },
+    {
+      "table": "job.outbox_execution_requested",
+      "columns": [
+        "status"
+      ],
+      "cardinality": "zero_or_more",
+      "parent_table": "job.outbox_execution_status",
+      "parent_columns": [
+        "status"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (status) REFERENCES job.outbox_execution_status(status)"
+    }
+  ],
+  "functions": [
+    {
+      "name": "job.update_updated_at_column",
+      "return_type": "trigger",
+      "arguments": "",
+      "type": "FUNCTION"
+    }
+  ],
+  "driver": {
+    "name": "postgres",
+    "meta": {
+      "current_schema": "public",
+      "search_paths": [
+        "schema_docs",
+        "public"
+      ],
+      "dict": {
+        "Functions": "Stored procedures and functions"
+      }
+    }
+  }
+}
