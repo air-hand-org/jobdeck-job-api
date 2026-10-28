@@ -41,15 +41,9 @@ jobs:
       - name: lint
         run: make lint
       - name: generate schema documentation
-        env:
-          PG_BIN: /usr/lib/postgresql/18/bin
-        run: |
-          curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo tee /usr/share/keyrings/postgresql.asc >/dev/null
-          . /etc/os-release
-          printf 'deb [signed-by=/usr/share/keyrings/postgresql.asc] https://apt.postgresql.org/pub/repos/apt %s-pgdg main\n' "$VERSION_CODENAME" | sudo tee /etc/apt/sources.list.d/pgdg.list >/dev/null
-          sudo apt-get update
-          sudo apt-get install -y postgresql-18
-          make schema-docs
+        run: make schema-docs
+      - name: build interactive schema ERD
+        run: make schema-erd
       - name: check clean
         run: make check-clean
       - name: test
