@@ -2,7 +2,7 @@
 go = "1.27.3"
 "go:github.com/nammn/go-licenses/v2" = "v2.0.0-20261013105856-260edf655cee"
 grpcurl = "1.9.4"
-node = "24.22.2"
+node = "26.13.0"
 "npm:@liam-hq/cli" = { version = "0.7.24", trust_policy_excludes = ["@swc/core@1.12.11"] }
 
 [env]
