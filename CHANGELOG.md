@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.2.1](https://github.com/air-hand-org/jobdeck-job-api/compare/v1.2.0...v1.2.1) (2026-11-06)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/air-hand-org/api-contracts/packages/jobdeck/auth to v1.6.0 ([#65](https://github.com/air-hand-org/jobdeck-job-api/issues/65)) ([86feae7](https://github.com/air-hand-org/jobdeck-job-api/commit/86feae747ea6cf535409470d2afb8924b3c5f580))
+* **deps:** update module github.com/air-hand-org/api-contracts/packages/jobdeck/auth to v1.6.1 ([#71](https://github.com/air-hand-org/jobdeck-job-api/issues/71)) ([15c2ea3](https://github.com/air-hand-org/jobdeck-job-api/commit/15c2ea397a40b46b1ef6193b8b49855bc78d1891))
+* **deps:** update module github.com/air-hand-org/api-contracts/packages/jobdeck/job to v1.3.1 ([#73](https://github.com/air-hand-org/jobdeck-job-api/issues/73)) ([fe2b566](https://github.com/air-hand-org/jobdeck-job-api/commit/fe2b5664fa240379d3be3d0730505816d2be5b68))
+* **deps:** update module github.com/jackc/pgx/v5 to v5.12.0 ([#72](https://github.com/air-hand-org/jobdeck-job-api/issues/72)) ([d20ad6d](https://github.com/air-hand-org/jobdeck-job-api/commit/d20ad6dc29e73646464e8424e7f85caf8aa3cd68))
+* **deps:** update module google.golang.org/grpc to v1.85.0 ([#68](https://github.com/air-hand-org/jobdeck-job-api/issues/68)) ([ae5019c](https://github.com/air-hand-org/jobdeck-job-api/commit/ae5019c8e081b0e8fe5aae2a06083550d44ec8b7))
+
 ## [1.2.0](https://github.com/air-hand-org/jobdeck-job-api/compare/v1.1.9...v1.2.0) (2026-10-28)
 
 
