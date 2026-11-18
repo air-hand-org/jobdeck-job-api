@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.2.2](https://github.com/air-hand-org/jobdeck-job-api/compare/v1.2.1...v1.2.2) (2026-11-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency go to v1.27.4 ([#92](https://github.com/air-hand-org/jobdeck-job-api/issues/92)) ([964dc30](https://github.com/air-hand-org/jobdeck-job-api/commit/964dc30040f55f410233ccc078103d93bdf1559e))
+* **deps:** update module cloud.google.com/go/pubsub/v2 to v2.9.0 ([#95](https://github.com/air-hand-org/jobdeck-job-api/issues/95)) ([6e13712](https://github.com/air-hand-org/jobdeck-job-api/commit/6e137121bf275f607c831990bffffb17c8c83e4b))
+* **deps:** update module github.com/air-hand-org/api-contracts/packages/jobdeck/auth to v1.6.2 ([#100](https://github.com/air-hand-org/jobdeck-job-api/issues/100)) ([7470981](https://github.com/air-hand-org/jobdeck-job-api/commit/747098113ede03c73661e131f551d94f09a71631))
+* **deps:** update module github.com/air-hand-org/api-contracts/packages/jobdeck/job to v1.3.2 ([#101](https://github.com/air-hand-org/jobdeck-job-api/issues/101)) ([2ea009b](https://github.com/air-hand-org/jobdeck-job-api/commit/2ea009b7f862734ab91192a95e2d31f08b768bf4))
+* **deps:** update module github.com/jackc/pgx/v5 to v5.13.0 ([#97](https://github.com/air-hand-org/jobdeck-job-api/issues/97)) ([4c6d481](https://github.com/air-hand-org/jobdeck-job-api/commit/4c6d481854b4663841f22dd1317e2fe427c9b9ad))
+* **deps:** update module github.com/pressly/goose/v3 to v3.30.0 ([#94](https://github.com/air-hand-org/jobdeck-job-api/issues/94)) ([3bbef93](https://github.com/air-hand-org/jobdeck-job-api/commit/3bbef93f0db7a116c55c9901c7c66a5dd4b4d344))
+* **deps:** update module github.com/pressly/goose/v3 to v3.30.1 ([#102](https://github.com/air-hand-org/jobdeck-job-api/issues/102)) ([86775fe](https://github.com/air-hand-org/jobdeck-job-api/commit/86775fefc48cf794a93405b218fa5b72d9cfecab))
+* **deps:** update module golang.org/x/sync to v0.25.0 ([#87](https://github.com/air-hand-org/jobdeck-job-api/issues/87)) ([ce6197d](https://github.com/air-hand-org/jobdeck-job-api/commit/ce6197dc472f8e5d8fce7aea5f97b3f2e79ca2de))
+* **deps:** update testcontainers-go monorepo to v0.45.0 ([#83](https://github.com/air-hand-org/jobdeck-job-api/issues/83)) ([ee8ae44](https://github.com/air-hand-org/jobdeck-job-api/commit/ee8ae44e23971f0a1ee3ffea9cc58b14592b434c))
+
 ## [1.2.1](https://github.com/air-hand-org/jobdeck-job-api/compare/v1.2.0...v1.2.1) (2026-11-08)
 
 
