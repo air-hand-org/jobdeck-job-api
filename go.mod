@@ -6,7 +6,7 @@ go 1.27.4
 replace google.golang.org/genproto v0.0.0-20230410155749-daa745c078e1 => google.golang.org/genproto v0.0.0-20260630182238-925bb5da69e7
 
 require (
-	buf.build/go/protovalidate v1.4.0
+	buf.build/go/protovalidate v1.4.1
 	cloud.google.com/go/pubsub/v2 v2.9.0
 	github.com/air-hand-org/api-contracts/packages/jobdeck/auth v1.6.2
 	github.com/air-hand-org/api-contracts/packages/jobdeck/job v1.3.2
@@ -33,7 +33,7 @@ require (
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.12-20260825204119-511051f7f437.2 // indirect
-	cel.dev/cel-go v0.32.0 // indirect
+	cel.dev/cel-go v0.33.2 // indirect
 	cel.dev/expr v0.25.3 // indirect
 	cloud.google.com/go v0.123.0 // indirect
 	cloud.google.com/go/auth v0.24.1-0.20261001053825-dbc26066f70a // indirect
