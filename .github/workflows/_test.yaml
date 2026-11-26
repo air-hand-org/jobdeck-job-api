@@ -47,4 +47,4 @@ jobs:
       - name: check clean
         run: make check-clean
       - name: test
-        run: make test
+        run: make test-race
