@@ -5,6 +5,8 @@ linters:
     - govet
     - revive
     - testifylint
+    - gocognit
+    - gocyclo
   exclusions:
     paths:
       - gen/
@@ -14,6 +16,39 @@ linters:
         linters:
           - govet
           - revive
+      # Allow only the existing diagnostic for each function, not later increases.
+      - path: ^cmd/server/main\.go$
+        linters: [gocognit]
+        text: '^cognitive complexity 15 of func `main` is high \(> 10\)$'
+      - path: ^internal/app/queue_usecase\.go$
+        linters: [gocognit]
+        text: '^cognitive complexity 15 of func `\(\*ExecutionQueueUsecase\)\.ReportExecutionResult` is high \(> 10\)$'
+      - path: ^internal/eventing/outbox_dispatcher\.go$
+        linters: [gocognit]
+        text: '^cognitive complexity 12 of func `\(\*OutboxDispatcher\)\.dispatch` is high \(> 10\)$'
+      - path: ^internal/repository/execution_repository\.go$
+        linters: [gocognit]
+        text: '^cognitive complexity 15 of func `\(\*executionRepository\)\.ListByJob` is high \(> 10\)$'
+      - path: ^internal/repository/job_repository\.go$
+        linters: [gocognit]
+        text: '^cognitive complexity 15 of func `\(\*jobRepository\)\.ListByOwner` is high \(> 10\)$'
+      - path: ^internal/auth/jwt_verifier\.go$
+        linters: [gocyclo]
+        text: '^cyclomatic complexity 11 of func `\(\*JWTVerifier\)\.publicKey` is high \(> 10\)$'
+      - path: ^cmd/server/main\.go$
+        linters: [gocyclo]
+        text: '^cyclomatic complexity 13 of func `main` is high \(> 10\)$'
+      - path: ^internal/repository/execution_repository\.go$
+        linters: [gocyclo]
+        text: '^cyclomatic complexity 11 of func `\(\*executionRepository\)\.ListByJob` is high \(> 10\)$'
+      - path: ^internal/repository/job_repository\.go$
+        linters: [gocyclo]
+        text: '^cyclomatic complexity 11 of func `\(\*jobRepository\)\.ListByOwner` is high \(> 10\)$'
+  settings:
+    gocognit:
+      min-complexity: 10
+    gocyclo:
+      min-complexity: 10
 
 formatters:
   enable:
