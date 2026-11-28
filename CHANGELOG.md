@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.3](https://github.com/air-hand-org/jobdeck-job-api/compare/v1.2.2...v1.2.3) (2026-11-28)
+
+
+### Bug Fixes
+
+* **deps:** update module buf.build/go/protovalidate to v1.4.1 ([#112](https://github.com/air-hand-org/jobdeck-job-api/issues/112)) ([e32c06c](https://github.com/air-hand-org/jobdeck-job-api/commit/e32c06cd8d1cdc041a005dde2fe1aad14f4d9401))
+* **deps:** update module golang.org/x/tools to v0.53.0 ([#109](https://github.com/air-hand-org/jobdeck-job-api/issues/109)) ([b8c08dc](https://github.com/air-hand-org/jobdeck-job-api/commit/b8c08dcd196cf0300812bb446b7c6af45b4258f1))
+
 ## [1.2.2](https://github.com/air-hand-org/jobdeck-job-api/compare/v1.2.1...v1.2.2) (2026-11-17)
 
 
